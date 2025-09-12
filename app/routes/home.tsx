@@ -1,13 +1,19 @@
 import type { Route } from "./+types/home";
-import { Welcome } from "../welcome/welcome";
+import { Button } from "~/components/ui/button";
 
 export function meta({}: Route.MetaArgs) {
+  // Remember to update the title and description
   return [
-    { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
+    { title: "My Easel App" },
+    { name: "description", content: "Welcome to My Easel App!" },
   ];
 }
 
 export default function Home() {
-  return <Welcome />;
+  return (
+    <div>
+      Replace this with your own content.
+      <Button>Click me</Button>
+    </div>
+  );
 }
