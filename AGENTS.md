@@ -6,7 +6,7 @@ This document explains the structure of this React Router v7 + Vite + shadcn/ui 
 
 This is a **Single Page Application (SPA)** built with modern React tooling:
 
-- **React Router v7** - Client-side routing with file-based routing
+- **React Router v7** - Client-side routing
 - **Vite** - Fast build tool and dev server
 - **shadcn/ui** - Pre-built, accessible UI components
 - **Tailwind CSS v4** - Utility-first CSS framework
@@ -23,7 +23,7 @@ This is a **Single Page Application (SPA)** built with modern React tooling:
 ## Project Structure
 
 ```
-app/
+src/
 ├── components/
 │   └── ui/                 # shadcn/ui components
 │       └── button.tsx      # Example UI component
@@ -31,7 +31,7 @@ app/
 │   └── utils.ts           # Utility functions (cn helper for Tailwind)
 ├── routes/
 │   └── home.tsx           # Home page route
-├── app.css               # Global styles and Tailwind imports
+├── globals.css               # Global styles and Tailwind imports
 ├── root.tsx              # Root layout component
 └── routes.ts             # Route configuration
 
@@ -46,10 +46,10 @@ app/
 
 ### 1. Create a Route Component
 
-Create a new file in the `app/routes/` directory:
+Create a new file in the `src/routes/` directory:
 
 ```typescript
-// app/routes/about.tsx
+// src/routes/about.tsx
 import type { Route } from "./+types/about";
 
 export function meta({}: Route.MetaArgs) {
@@ -71,7 +71,7 @@ export default function About() {
 
 ### 2. Register the Route
 
-Add your route to `app/routes.ts`:
+Add your route to `src/routes.ts`:
 
 ```typescript
 import {
@@ -143,14 +143,14 @@ export default function Navigation() {
 
 ### UI Components (shadcn/ui)
 
-- Located in `app/components/ui/`
+- Located in `src/components/ui/`
 - Follow shadcn/ui patterns with `cva` for variant styling
 - Use the `cn` utility for conditional classes
-- Example: `app/components/ui/button.tsx`
+- Example: `src/components/ui/button.tsx`
 
 ### Page Components
 
-- Located in `app/routes/`
+- Located in `src/routes/`
 - Export a default component function
 - Can export `meta` function for SEO metadata
 - Can export `loader` function for data fetching (though limited in SPA mode)
@@ -161,16 +161,16 @@ export default function Navigation() {
 
 **Important**: This project uses Tailwind CSS v4, which has a different configuration approach than v3:
 
-- **Configuration in CSS**: All Tailwind configuration happens in `app/app.css` using CSS-based configuration
+- **Configuration in CSS**: All Tailwind configuration happens in `src/globals.css` using CSS-based configuration
 - **No `tailwind.config.js`**: Unlike v3, there's no separate config file
-- **Theme Configuration**: Customize colors, fonts, and other design tokens using `@theme` blocks in `app/app.css`
-- **Custom Variants**: Define custom variants using `@custom-variant` in `app/app.css`
-- **Global Styles**: Import Tailwind and define global styles in `app/app.css`
+- **Theme Configuration**: Customize colors, fonts, and other design tokens using `@theme` blocks in `src/globals.css`
+- **Custom Variants**: Define custom variants using `@custom-variant` in `src/globals.css`
+- **Global Styles**: Import Tailwind and define global styles in `src/globals.css`
 - **Dark Mode**: Configured using CSS custom properties and the `.dark` class
 
 ### Customizing Tailwind CSS v4
 
-To customize Tailwind CSS v4, edit the `app/app.css` file:
+To customize Tailwind CSS v4, edit the `src/globals.css` file:
 
 ```css
 @import "tailwindcss";
@@ -248,19 +248,18 @@ npm install -D package-name
 
 ## Best Practices
 
-1. **File-based Routing**: Keep route components in `app/routes/`
-2. **Component Organization**: Group related components in subdirectories
-3. **Type Safety**: Use TypeScript types for route parameters and props
-4. **SEO**: Always export `meta` functions for proper page titles and descriptions
-5. **Accessibility**: Use shadcn/ui components which are built with accessibility in mind
-6. **Performance**: Keep components lightweight since everything runs client-side
+1. **Component Organization**: Group related components in subdirectories
+2. **Type Safety**: Use TypeScript types for route parameters and props
+3. **SEO**: Always export `meta` functions for proper page titles and descriptions
+4. **Accessibility**: Use shadcn/ui components which are built with accessibility in mind
+5. **Performance**: Keep components lightweight since everything runs client-side
 
 ## Common Patterns
 
 ### Route with Parameters
 
 ```typescript
-// app/routes/user.tsx
+// src/routes/user.tsx
 import type { Route } from "./+types/user";
 
 export function meta({ params }: Route.MetaArgs) {
@@ -277,7 +276,7 @@ export default function User({ params }: Route.ComponentProps) {
 ### Layout with Nested Routes
 
 ```typescript
-// app/routes/dashboard/layout.tsx
+// src/routes/dashboard/layout.tsx
 export default function DashboardLayout() {
   return (
     <div className="flex">
